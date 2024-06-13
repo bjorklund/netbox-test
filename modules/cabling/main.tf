@@ -120,8 +120,6 @@ resource "netbox_cable" "A1004" {
   }
 }
 
-
-
 resource "netbox_cable" "A2001" {
   status      = "connected"
   label       = "A2001"

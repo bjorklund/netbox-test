@@ -43,7 +43,6 @@ variable "netbox_rack_STH-DC02-R01_id" {
   default = null
 }
 
-
 resource "netbox_device" "DC01-HWserver05" {
   name           = "DC01-HWserver05"
   device_type_id = var.netbox_device_type_HPDL365_id
@@ -148,20 +147,6 @@ resource "netbox_device_interface" "DC01-HWserver01_nics" {
   name = "nic${count.index + 1}"
   type           = "25gbase-x-sfp28"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # DC02
 

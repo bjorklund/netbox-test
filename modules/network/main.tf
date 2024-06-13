@@ -148,8 +148,6 @@ resource "netbox_device_interface" "DC02-core-sw02-ports" {
   type           = "25gbase-x-sfp28"
 }
 
-
-
 output "netbox_device_type_Fortigate_3000F_id" {
     value = netbox_device_type.Fortigate_3000F.id
 }

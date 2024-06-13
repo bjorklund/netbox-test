@@ -55,8 +55,6 @@ resource "netbox_device_interface" "baset" {
   type      = "1000base-t"
 }
 
-
-
 module "sites" {
    source = "./modules/sites"
 }
@@ -69,15 +67,12 @@ module "network" {
    source = "./modules/network"
    netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
    netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
-
    netbox_rack_STH-DC01-R01_id = module.racks.netbox_rack_STH-DC01-R01_id
    netbox_rack_STH-DC01-R02_id = module.racks.netbox_rack_STH-DC01-R02_id
    netbox_rack_STH-DC02-R01_id = module.racks.netbox_rack_STH-DC02-R01_id
    netbox_rack_STH-DC02-R02_id = module.racks.netbox_rack_STH-DC02-R02_id
-
    netbox_device_role_Firewall_id = netbox_device_role.Firewall.id
    netbox_device_role_Core-Switch_id = netbox_device_role.Core-Switch.id
-
    netbox_manufacturer_Fortinet_id = netbox_manufacturer.Fortinet.id
 
 }
@@ -95,16 +90,13 @@ module "cabling" {
    source = "./modules/cabling"
    netbox_device_interface_DC01-core-sw01-ports = module.network.netbox_device_interface_DC01-core-sw01-ports
    netbox_device_interface_DC01-core-sw02-ports = module.network.netbox_device_interface_DC01-core-sw02-ports
-
    netbox_device_interface_DC02-core-sw01-ports = module.network.netbox_device_interface_DC02-core-sw01-ports
    netbox_device_interface_DC02-core-sw02-ports = module.network.netbox_device_interface_DC02-core-sw02-ports
-
    netbox_device_interface_DC01-HWserver01_nics = module.servers.netbox_device_interface_DC01-HWserver01_nics
    netbox_device_interface_DC01-HWserver02_nics = module.servers.netbox_device_interface_DC01-HWserver02_nics
    netbox_device_interface_DC01-HWserver03_nics = module.servers.netbox_device_interface_DC01-HWserver03_nics
    netbox_device_interface_DC01-HWserver04_nics = module.servers.netbox_device_interface_DC01-HWserver04_nics
    netbox_device_interface_DC01-HWserver05_nics = module.servers.netbox_device_interface_DC01-HWserver05_nics
-
    netbox_device_interface_DC02-HWserver01_nics = module.servers.netbox_device_interface_DC02-HWserver01_nics
    netbox_device_interface_DC02-HWserver02_nics = module.servers.netbox_device_interface_DC02-HWserver02_nics
    netbox_device_interface_DC02-HWserver03_nics = module.servers.netbox_device_interface_DC02-HWserver03_nics
