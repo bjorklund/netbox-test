@@ -7,11 +7,6 @@ terraform {
   }
 }
 
-locals {
-	netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
-	netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
-}
-
 variable "server_url" {
 	type  = string
 }
@@ -19,13 +14,10 @@ variable "api_token" {
 	type  = string
 }
 
-
 provider "netbox" {
   server_url = var.server_url
   api_token  = var.api_token
 }
-
-
 
 resource "netbox_device_role" "Hypervisor" {
   name      = "Hypervisor"
@@ -99,7 +91,6 @@ module "servers" {
    netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
    netbox_rack_STH-DC02-R01_id = module.racks.netbox_rack_STH-DC02-R01_id
 }
-
 module "cabling" {
    source = "./modules/cabling"
    netbox_device_interface_DC01-core-sw01-ports = module.network.netbox_device_interface_DC01-core-sw01-ports
@@ -121,4 +112,3 @@ module "cabling" {
    netbox_device_interface_DC02-HWserver05_nics = module.servers.netbox_device_interface_DC02-HWserver05_nics
 
 }
-
