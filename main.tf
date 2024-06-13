@@ -25,30 +25,7 @@ provider "netbox" {
   api_token  = var.api_token
 }
 
-module "sites" {
-   source = "./modules/sites"
-}
-module "racks" {
-   source = "./modules/racks"
-   netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
-   netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
-}
-module "network" {
-   source = "./modules/network"
-   netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
-   netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
 
-   netbox_rack_STH-DC01-R01_id = module.racks.netbox_rack_STH-DC01-R01_id
-   netbox_rack_STH-DC01-R02_id = module.racks.netbox_rack_STH-DC01-R02_id
-   netbox_rack_STH-DC02-R01_id = module.racks.netbox_rack_STH-DC02-R01_id
-   netbox_rack_STH-DC02-R02_id = module.racks.netbox_rack_STH-DC02-R02_id
-
-   netbox_device_role_Firewall_id = netbox_device_role.Firewall.id
-   netbox_device_role_Core-Switch_id = netbox_device_role.Core-Switch.id
-
-   netbox_manufacturer_Fortinet_id = netbox_manufacturer.Fortinet.id
-
-}
 
 resource "netbox_device_role" "Hypervisor" {
   name      = "Hypervisor"
@@ -86,6 +63,32 @@ resource "netbox_device_interface" "baset" {
   type      = "1000base-t"
 }
 
+
+
+module "sites" {
+   source = "./modules/sites"
+}
+module "racks" {
+   source = "./modules/racks"
+   netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
+   netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
+}
+module "network" {
+   source = "./modules/network"
+   netbox_site_STH-DC01_id = module.sites.netbox_site_STH-DC01_id
+   netbox_site_STH-DC02_id = module.sites.netbox_site_STH-DC02_id
+
+   netbox_rack_STH-DC01-R01_id = module.racks.netbox_rack_STH-DC01-R01_id
+   netbox_rack_STH-DC01-R02_id = module.racks.netbox_rack_STH-DC01-R02_id
+   netbox_rack_STH-DC02-R01_id = module.racks.netbox_rack_STH-DC02-R01_id
+   netbox_rack_STH-DC02-R02_id = module.racks.netbox_rack_STH-DC02-R02_id
+
+   netbox_device_role_Firewall_id = netbox_device_role.Firewall.id
+   netbox_device_role_Core-Switch_id = netbox_device_role.Core-Switch.id
+
+   netbox_manufacturer_Fortinet_id = netbox_manufacturer.Fortinet.id
+
+}
 module "servers" {
    source = "./modules/servers"
    netbox_device_type_HPDL365_id = netbox_device_type.HPDL365.id
